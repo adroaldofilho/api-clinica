@@ -34,6 +34,9 @@ export default function (sequelize, DataTypes){
                 notEmpty: true
             }    
         },
+        tipoUsuario: {
+            type: DataTypes.STRING // Secretaria, Paciente, Profissional, Administrador
+        },
         picture: {
             type: DataTypes.BLOB
         }

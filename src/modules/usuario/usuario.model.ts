@@ -1,4 +1,5 @@
 import { IProfissional } from "../profissional/profissional.model";
+import { IConsulta } from "../consulta/consulta.model";
 
 export interface IUsuario {
     readonly idUsuario: number,
@@ -6,14 +7,16 @@ export interface IUsuario {
     email: string,
     senha: string,
     telefone: string,
+    tipoUsuario: string,
     picture: Blob,
-    Profissionals?: IProfissional[];
+    Profissionals?: IProfissional[],
+    Consulta?: IConsulta[];
 }
 
 
-export function createUsuario({idUsuario, nome, email, senha, telefone, picture, Profissionals}: any): IUsuario {
+export function createUsuario({idUsuario, nome, email, senha, telefone, tipoUsuario, picture, Profissionals, Consulta}: any): IUsuario {
     return {
-        idUsuario, nome, email, senha, telefone, picture, Profissionals
+        idUsuario, nome, email, senha, telefone, tipoUsuario, picture, Profissionals, Consulta
     }
 }
 
@@ -21,14 +24,14 @@ export function createUsuarios(data: any[]): IUsuario[] {
     return data.map(createUsuario);
 }
 
-export function createUsuarioById({idUsuario, nome, email, senha, telefone, picture, Profissionals}: any): IUsuario {
+export function createUsuarioById({idUsuario, nome, email, senha, telefone, tipoUsuario, picture, Profissionals, Consulta}: any): IUsuario {
     return {
-        idUsuario, nome, email, senha, telefone, picture, Profissionals
+        idUsuario, nome, email, senha, telefone, tipoUsuario, picture, Profissionals, Consulta
     };
 }
 
-export function createUsuarioByEmail({idUsuario, nome, email, senha, telefone, picture, Profissionals}: any): IUsuario {
+export function createUsuarioByEmail({idUsuario, nome, email, senha, telefone, tipoUsuario, picture, Profissionals, Consulta}: any): IUsuario {
     return {
-        idUsuario, nome, email, senha, telefone, picture, Profissionals
+        idUsuario, nome, email, senha, telefone, tipoUsuario, picture, Profissionals, Consulta
     };
 }

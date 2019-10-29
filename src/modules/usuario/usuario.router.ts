@@ -24,6 +24,11 @@ export class UsuarioRouterModule  extends BaseRouterModule {
                     endpoint: `${ this.context }/${ this.version }/${ this.moduleName }/:idUsuario`,
                     callback: this.findOne,
                     isProtected: true
+                },
+                {
+                    endpoint: `${ this.context }/${ this.version }/${ this.moduleName }/tipousuario/:tipoUsuario`,
+                    callback: this.findByTipoUsuario,
+                    isProtected: true
                 }
             ],
             post: [
@@ -60,11 +65,23 @@ export class UsuarioRouterModule  extends BaseRouterModule {
             return ResponseHandlers.onError(res, 'Erro ao buscar todos os usuários', error);
         }
     }
+    
+    async findByTipoUsuario(req: Request, res: Response){
+        
+        try {
+            const tipoUsuario = req.params.tipoUsuario;
+            const usuario: Array<IUsuario> = await UsuarioService.getByTipoUsuario(tipoUsuario); 
+            return ResponseHandlers.onSuccess(res, usuario);
+        } catch (error) {
+            return ResponseHandlers.onError(res, 'Erro ao buscar todos os usuários', error);
+        }
+    }
 
     async findOne(req: Request, res: Response){
         try {
             const usuarioId = parseInt(req.params.idUsuario);
             const usuario: IUsuario = await UsuarioService.getById(usuarioId);
+            console.log('find Usuario: ', usuario );
             return ResponseHandlers.onSuccess(res, usuario);
         } catch (error) {
             return ResponseHandlers.onError(res, 'Erro ao buscar o usuário', error);

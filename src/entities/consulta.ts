@@ -29,7 +29,14 @@ export default function (sequelize, DataTypes){
             }
         },
         statusConsulta: {
-            type: DataTypes.INTEGER, // 1 - Marcada, 2 - Confirmada, 3 - Em Andamento, 4 - Cancelada, 9 - Encerrada
+            type: DataTypes.INTEGER, // 1 - Marcada, 2 - Confirmada, 3 - Paciente Chegou, 4 - Em Andamento, 5 - Cancelada, 9 - Encerrada
+            allowNull: false,
+            validate: {
+                notEmpty: true
+            }
+        },
+        idPlano: {
+            type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
                 notEmpty: true

@@ -6,6 +6,8 @@ import { ClinicaRouterModule } from './clinica/clinica.router';
 import { ProfissionalEspecialidadeRouterModule } from './profissionalespecialidade/profissionalespecialidade.router';
 import { ProfissionalClinicaRouterModule } from './profissionalclinica/profissionalclinica.router';
 import { ConsultaRouterModule } from './consulta/consulta.router';
+import { PlanoRouterModule } from './plano/plano.router';
+import { DocumentoConsultaRouterModule } from './documentoconsulta/documentoconsulta.router';
 
 export interface FeatureModuleRouter {
     moduleName: any;
@@ -46,6 +48,14 @@ export class ModulesRouterMapper {
         },
         {
             moduleName: ConsultaRouterModule,
+            parser: 'getRoutesFromModules'
+        },
+        {
+            moduleName: PlanoRouterModule,
+            parser: 'getRoutesFromModules'
+        },
+        {
+            moduleName: DocumentoConsultaRouterModule,
             parser: 'getRoutesFromModules'
         }
     ];

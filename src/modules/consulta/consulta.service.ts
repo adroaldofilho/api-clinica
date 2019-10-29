@@ -2,6 +2,7 @@ import { IConsulta, createConsulta, createConsultas } from '../consulta/consulta
 import * as BlueBird from 'bluebird';
 import { IProfissionalClinica } from '../profissionalclinica/profissionalclinica.model';
 import { IUsuario } from '../usuario/usuario.model';
+import { IPlano } from '../plano/plano.model';
 const model = require('../../entities');
 
 export class ConsultaService  {
@@ -12,6 +13,8 @@ export class ConsultaService  {
     public Usuario?: IUsuario;
     public dataHoraConsulta: Date;
     public statusConsulta: number;
+    public idPlano?: number;
+    public Plano?: IPlano;
 
     constructor(){
 
@@ -30,7 +33,45 @@ export class ConsultaService  {
                                         } 
                                     ] 
                        },
-                       { model: model.Usuario }
+                       { model: model.Usuario },
+                       { model: model.Plano }
+                     ]
+        })
+        .then(createConsultas);
+    }
+
+    getByProfissionalClinica(idProfissionalClinica): BlueBird<IConsulta[]> {
+        return model.Consulta.findAll({
+            where: {idProfissionalClinica},
+            order: ['idUsuario'],
+            include: [ { model: model.ProfissionalClinica,
+                            include: [ { model: model.Clinica },
+                                        { model: model.Profissional ,
+                                            include: [ { model: model.Usuario } ]
+                                        } 
+                                    ] 
+                       },
+                       { model: model.Usuario },
+                       { model: model.Plano }
+                     ]
+        })
+        .then(createConsultas);
+    }
+
+    getByUsuario(idUsuario): BlueBird<IConsulta[]> {
+        return model.Consulta.findAll({
+            where: {idUsuario},
+            order: [['dataHoraConsulta', 'DESC']],
+            include: [ { model: model.ProfissionalClinica,
+                            include: [ { model: model.Clinica },
+                                        { model: model.Profissional ,
+                                            include: [ { model: model.Usuario } ]
+                                        } 
+                                    ] 
+                       },
+                       { model: model.Usuario },
+                       { model: model.Plano },
+                       { model: model.DocumentoConsulta }
                      ]
         })
         .then(createConsultas);
@@ -46,7 +87,12 @@ export class ConsultaService  {
                                         } 
                                     ] 
                         },
-                        { model: model.Usuario }
+                        { model: model.Usuario,
+                            include: [ { model:  model.Consulta ,
+                                            order: [['dataHoraConsulta', 'DESC']],
+                                            include: [ { model: model.DocumentoConsulta } ] } ] },
+                        { model: model.Plano },
+                        { model: model.DocumentoConsulta }
               ]
         })
         .then(createConsulta);
@@ -55,7 +101,7 @@ export class ConsultaService  {
     update(idConsulta: number, consulta: any){
         return model.Consulta.update(consulta, {
             where: {idConsulta},
-            fields: ['dataHoraConsulta', 'idProfissionalClinica', 'statusConsulta'],
+            fields: ['dataHoraConsulta', 'idProfissionalClinica', 'statusConsulta', 'idPlano'],
             hooks: true,
             individualHooks: true
           });

@@ -23,7 +23,14 @@ export class ProfissionalClinicaService  {
         return model.ProfissionalClinica.findAll({
             order: ['idClinica'],
             include: [ { model: model.Clinica },
-                        { model: model.Profissional } ]
+                { model: model.Profissional, 
+                    include:[ { model: model.Usuario },
+                              { model: model.ProfissionalEspecialidade ,
+                                 include: [ { model: model.Especialidade } ] 
+                              } 
+                            ] 
+                } 
+            ]
         })
         .then(createProfissionalClinicas);
     }
@@ -50,6 +57,29 @@ export class ProfissionalClinicaService  {
         return model.ProfissionalClinica.destroy({
             where: {idProfissionalClinica}
           });
+    }
+    
+    deleteByProfissionalClinica(idProfissional: number, idClinica: number) {
+        return model.ProfissionalClinica.destroy({
+            where: {idProfissional,
+                    idClinica }
+          });
+    }
+    
+    getByClinica(idClinica: number): BlueBird<IProfissionalClinica[]> {
+        return model.ProfissionalClinica.findAll({
+            where: {idClinica},
+            include: [ { model: model.Clinica },
+                        { model: model.Profissional, 
+                            include:[ { model: model.Usuario },
+                                      { model: model.ProfissionalEspecialidade ,
+                                         include: [ { model: model.Especialidade } ] 
+                                      } 
+                                    ] 
+                        } 
+                    ]
+        })
+        .then(createProfissionalClinicas);
     }
 }
 export default new ProfissionalClinicaService();

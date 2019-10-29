@@ -5,6 +5,9 @@ const Relations = (model) => {
     model.Usuario.hasMany(model.Profissional, { foreignKey: 'idUsuario' });
     model.Profissional.belongsTo(model.Usuario, { foreignKey: 'idUsuario'});
 
+    model.Usuario.hasMany(model.Consulta, { foreignKey: 'idUsuario' });
+    model.Consulta.belongsTo(model.Usuario, { foreignKey: 'idUsuario'});
+    
     model.Profissional.hasMany(model.ProfissionalEspecialidade, { foreignKey: 'idProfissional' });
     model.ProfissionalEspecialidade.belongsTo(model.Profissional, { foreignKey: 'idProfissional' });
 
@@ -20,8 +23,11 @@ const Relations = (model) => {
     model.ProfissionalClinica.hasMany(model.Consulta, { foreignKey: 'idProfissionalClinica' });
     model.Consulta.belongsTo(model.ProfissionalClinica, { foreignKey: 'idProfissionalClinica' });
 
-    model.Usuario.hasMany(model.Consulta, { foreignKey: 'idUsuario' });
-    model.Consulta.belongsTo(model.Usuario, { foreignKey: 'idUsuario'});
+    model.Plano.hasMany(model.Consulta, { foreignKey: 'idPlano' });
+    model.Consulta.belongsTo(model.Plano, { foreignKey: 'idPlano'});
+
+    model.Consulta.hasMany(model.DocumentoConsulta, { foreignKey: 'idConsulta' });
+    model.DocumentoConsulta.belongsTo(model.Consulta, { foreignKey: 'idConsulta'});
 
     // model.Profissional.belongsToMany(model.Especialidade, { through: 'especialidadedoprofissional' });
     // model.Especialidade.belongsToMany(model.Profissional, { through: 'especialidadedoprofissional' });

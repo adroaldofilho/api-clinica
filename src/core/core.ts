@@ -44,7 +44,9 @@ export class CoreModule {
     }
 
     private configHeaders(req: Request, res: Response, next: NextFunction){
-        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+        // res.setHeader('Access-Control-Allow-Origin', 'http://192.168.15.133:4200');
         res.setHeader('Access-Control-Allow-Methods', '*');
         res.setHeader('Access-Control-Allow-Headers', '*');
         next();

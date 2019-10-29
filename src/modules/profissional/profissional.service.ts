@@ -20,8 +20,11 @@ export class ProfissionalService  {
     getAll(): BlueBird<IProfissional[]> {
         return model.Profissional.findAll({
             order: ['idUsuario'],
-            include: [ { model: model.Usuario },
-                        { model: model.ProfissionalEspecialidade }]
+            include: [ { model: model.Usuario } ,
+                { model: model.ProfissionalEspecialidade ,
+                    include: [{ model: model.Especialidade }] 
+                }
+            ]
             
         })
         .then(createProfissionals);

@@ -24,12 +24,22 @@ export class ProfissionalClinicaRouterModule  extends BaseRouterModule {
                     endpoint: `${ this.context }/${ this.version }/${ this.moduleName }/:idProfissionalClinica`,
                     callback: this.findOne,
                     isProtected: true
+                },
+                {
+                    endpoint: `${ this.context }/${ this.version }/${ this.moduleName }/getbyclinica/:idClinica`,
+                    callback: this.findByClinica,
+                    isProtected: true
                 }
             ],
             post: [
                 {
                     endpoint: `${ this.context }/${ this.version }/${ this.moduleName }/create`,
                     callback: this.create,
+                    isProtected: true
+                },
+                {
+                    endpoint: `${ this.context }/${ this.version }/${ this.moduleName }/destroybyprofissionalclinica`,
+                    callback: this.destroyByProfissionalClinica,
                     isProtected: true
                 }
             ],
@@ -55,6 +65,17 @@ export class ProfissionalClinicaRouterModule  extends BaseRouterModule {
         
         try {
             const profissionalClinica: Array<IProfissionalClinica> = await ProfissionalClinicaService.getAll(); 
+            return ResponseHandlers.onSuccess(res, profissionalClinica);
+        } catch (error) {
+            return ResponseHandlers.onError(res, 'Erro ao buscar todos as associações de profissionais com Clinica', error);
+        }
+    }
+
+    async findByClinica(req: Request, res: Response){
+        
+        try {
+            const clinicaId = parseInt(req.params.idClinica);
+            const profissionalClinica: Array<IProfissionalClinica> = await ProfissionalClinicaService.getByClinica(clinicaId); 
             return ResponseHandlers.onSuccess(res, profissionalClinica);
         } catch (error) {
             return ResponseHandlers.onError(res, 'Erro ao buscar todos as associações de profissionais com Clinica', error);
@@ -102,4 +123,16 @@ export class ProfissionalClinicaRouterModule  extends BaseRouterModule {
         }
     }
 
+    async destroyByProfissionalClinica(req: Request, res: Response){
+        try {
+            console.log('destroyByProfissionalClinica = ', req.body);
+            const clinicaId = req.body['idClinica'];
+            const profissionalId = req.body['idProfissional'];
+            const profissionalClinica: IProfissionalClinica = 
+            await ProfissionalClinicaService.deleteByProfissionalClinica(profissionalId, clinicaId); 
+            return ResponseHandlers.onSuccess(res, profissionalClinica);
+        } catch (error) {
+            return ResponseHandlers.onError(res, 'Erro ao excluir a associação de profissional com Clinica', error);
+        }
+    }
 }

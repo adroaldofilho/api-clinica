@@ -1,7 +1,7 @@
-import { IProfissional } from "../profissional/profissional.model";
-import { IClinica } from "../clinica/clinica.model";
 import { IProfissionalClinica } from "../profissionalclinica/profissionalclinica.model";
 import { IUsuario } from "../usuario/usuario.model";
+import { IPlano } from "../plano/plano.model";
+import { IDocumentoConsulta } from "../documentoconsulta/documentoconsulta.model";
 export interface IConsulta {
     readonly idConsulta: number 
     idProfissionalClinica?: number,
@@ -10,12 +10,15 @@ export interface IConsulta {
     Usuario?: IUsuario;
     dataHoraConsulta: Date;
     statusConsulta: number;
+    idPlano?: number;
+    Plano?: IPlano;
+    DocumentoConsulta?: IDocumentoConsulta[];
 }
 
 export function createConsulta(
-    {idConsulta, ProfissionalClinica, Usuario, dataHoraConsulta, statusConsulta}: any): IConsulta {
+    {idConsulta, ProfissionalClinica, Usuario, dataHoraConsulta, statusConsulta, Plano, DocumentoConsulta}: any): IConsulta {
     return {
-        idConsulta, ProfissionalClinica, Usuario, dataHoraConsulta, statusConsulta
+        idConsulta, ProfissionalClinica, Usuario, dataHoraConsulta, statusConsulta, Plano, DocumentoConsulta
     }
 }
 

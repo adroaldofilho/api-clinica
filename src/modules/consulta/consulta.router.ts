@@ -24,6 +24,16 @@ export class ConsultaRouterModule  extends BaseRouterModule {
                     endpoint: `${ this.context }/${ this.version }/${ this.moduleName }/:idConsulta`,
                     callback: this.findOne,
                     isProtected: true
+                },
+                {
+                    endpoint: `${ this.context }/${ this.version }/${ this.moduleName }/profissional/:idProfissionalClinica`,
+                    callback: this.findByProfissional,
+                    isProtected: true
+                },
+                {
+                    endpoint: `${ this.context }/${ this.version }/${ this.moduleName }/usuario/:idUsuario`,
+                    callback: this.findByUsuario,
+                    isProtected: true
                 }
             ],
             post: [
@@ -58,6 +68,28 @@ export class ConsultaRouterModule  extends BaseRouterModule {
             return ResponseHandlers.onSuccess(res, consulta);
         } catch (error) {
             return ResponseHandlers.onError(res, 'Erro ao buscar todas as consultas', error);
+        }
+    }
+
+    async findByProfissional(req: Request, res: Response){
+        
+        try {
+            const profissionalClinicaId = parseInt(req.params.idProfissionalClinica);
+            const consulta: Array<IConsulta> = await ConsultaService.getByProfissionalClinica(profissionalClinicaId); 
+            return ResponseHandlers.onSuccess(res, consulta);
+        } catch (error) {
+            return ResponseHandlers.onError(res, 'Erro ao buscar as consultas', error);
+        }
+    }
+
+    async findByUsuario(req: Request, res: Response){
+        
+        try {
+            const usuarioId = parseInt(req.params.idUsuario);
+            const consulta: Array<IConsulta> = await ConsultaService.getByUsuario(usuarioId); 
+            return ResponseHandlers.onSuccess(res, consulta);
+        } catch (error) {
+            return ResponseHandlers.onError(res, 'Erro ao buscar as consultas', error);
         }
     }
 
