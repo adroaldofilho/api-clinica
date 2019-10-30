@@ -1,5 +1,5 @@
 import { IEspecialidade, createEspecialidade, createEspecialidades, createEspecialidadeById, createEspecialidadeByEmail } 
-                    from './Especialidade.model';
+                    from './especialidade.model';
 import * as BlueBird from 'bluebird';
 const model = require('../../entities');
 
