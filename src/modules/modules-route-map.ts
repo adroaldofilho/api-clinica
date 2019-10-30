@@ -6,8 +6,10 @@ import { ClinicaRouterModule } from '../modules/clinica/clinica.router';
 import { ProfissionalEspecialidadeRouterModule } from '../modules/profissionalespecialidade/profissionalespecialidade.router';
 import { ProfissionalClinicaRouterModule } from '../modules/profissionalclinica/profissionalclinica.router';
 import { ConsultaRouterModule } from '../modules/consulta/consulta.router';
-import { PlanoRouterModule } from '../modules/plano/plano.router';
-import { DocumentoConsultaRouterModule } from '../modules/documentoconsulta/documentoconsulta.router';
+import { PlanoRouterModule } from './plano/plano.router';
+// import { DocumentoConsultaRouterModule } from '../modules/documentoconsulta/documentoconsulta.router';
+import { DocumentoConsultaRouterModule } from './documentoconsulta/documentoconsulta.router';
+
 
 export interface FeatureModuleRouter {
     moduleName: any;
