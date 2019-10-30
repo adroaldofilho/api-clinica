@@ -1,13 +1,13 @@
 import { AuthRouterModule } from '../modules/auth/auth-router';
 import { UsuarioRouterModule } from '../modules/usuario/usuario.router';
-import { ProfissionalRouterModule } from './profissional/profissional.router';
-import { EspecialidadeRouterModule } from './especialidade/especialidade.router';
-import { ClinicaRouterModule } from './clinica/clinica.router';
-import { ProfissionalEspecialidadeRouterModule } from './profissionalespecialidade/profissionalespecialidade.router';
-import { ProfissionalClinicaRouterModule } from './profissionalclinica/profissionalclinica.router';
-import { ConsultaRouterModule } from './consulta/consulta.router';
-import { PlanoRouterModule } from './plano/plano.router';
-import { DocumentoConsultaRouterModule } from './documentoconsulta/documentoconsulta.router';
+import { ProfissionalRouterModule } from '../modules/profissional/profissional.router';
+import { EspecialidadeRouterModule } from '../modules/especialidade/especialidade.router';
+import { ClinicaRouterModule } from '../modules/clinica/clinica.router';
+import { ProfissionalEspecialidadeRouterModule } from '../modules/profissionalespecialidade/profissionalespecialidade.router';
+import { ProfissionalClinicaRouterModule } from '../modules/profissionalclinica/profissionalclinica.router';
+import { ConsultaRouterModule } from '../modules/consulta/consulta.router';
+import { PlanoRouterModule } from '../modules/plano/plano.router';
+import { DocumentoConsultaRouterModule } from '../modules/documentoconsulta/documentoconsulta.router';
 
 export interface FeatureModuleRouter {
     moduleName: any;
