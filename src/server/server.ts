@@ -9,7 +9,7 @@ export class Server {
     constructor(dataBaseConnector){
         // this.express = new CoreModule().express;
         // this.upServer();
-        // console.log(dataBaseConnector);
+        console.log(dataBaseConnector);
         if (dataBaseConnector){
             this.db = dataBaseConnector;
             this.express = new CoreModule().express;
