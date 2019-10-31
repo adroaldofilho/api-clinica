@@ -42,7 +42,7 @@ export class Server {
         const PORT = process.env.PORT || 5000;
         http
             .createServer(this.express)
-            .listen(serverPort)
+            .listen(PORT)
             .on('listening', this.onServerUp.bind(this, PORT))
             .on('error', this.onServerStartUpError.bind(this));
     }
