@@ -40,8 +40,9 @@ export class Server {
     }
 
     private upServer() {
-        console.log('process.env.PORT: ', process.env.PORT);
         const PORT = process.env.PORT || 5000;
+        console.log('PORT: ', PORT);
+
         http
             .createServer(this.express)
             .listen(PORT)
