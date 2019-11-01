@@ -31,7 +31,7 @@ export class CoreModule {
         this.express.use(cors());
         this.express.use(this.configHeaders.bind(this));
         this.express.use(morgan('dev'));
-        this.express.use(bodyParser.urlencoded({ extended: true }));
+        this.express.use(bodyParser.urlencoded({ extended: true }));    
         this.express.use(bodyParser.json());
         this.express.use(ResponseHandlers.errorHandlerApi);
         // this.express.use(this.authService.initialize());

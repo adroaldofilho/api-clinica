@@ -9,7 +9,7 @@ export class Server {
     constructor(dataBaseConnector){
         // this.express = new CoreModule().express;
         // this.upServer();
-        console.log(dataBaseConnector);
+        // console.log(dataBaseConnector);
         if (dataBaseConnector){
             this.db = dataBaseConnector;
             this.express = new CoreModule().express;
@@ -40,6 +40,7 @@ export class Server {
     }
 
     private upServer() {
+        console.log('process.env.PORT: ', process.env.PORT);
         const PORT = process.env.PORT || 5000;
         http
             .createServer(this.express)
