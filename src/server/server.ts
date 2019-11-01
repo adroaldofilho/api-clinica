@@ -29,6 +29,7 @@ export class Server {
     private dataBaseErrorHandler(error: any) {
         console.log(`Não foi possível conectar ao banco de dados. Erro: ${error}`);
         this.upServer();
+        
     }
 
     private dataBaseSyncHandler(dataBaseInfo: any) {
