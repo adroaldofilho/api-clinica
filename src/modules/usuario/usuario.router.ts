@@ -35,7 +35,7 @@ export class UsuarioRouterModule  extends BaseRouterModule {
                 {
                     endpoint: `${ this.context }/${ this.version }/${ this.moduleName }/create`,
                     callback: this.create,
-                    isProtected: true
+                    isProtected: false
                 }
             ],
             put: [
