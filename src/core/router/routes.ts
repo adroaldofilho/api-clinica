@@ -48,8 +48,8 @@ export class RouterModule {
             const { isProtected, callback, endpoint } = routerInfo;
             console.log(isProtected, callback, endpoint, registeredVerb);
             if (isProtected) {
-                // this.express.route(endpoint)[registeredVerb](callback);
-                this.express.route(endpoint).all(this.auth.config().authenticate())[registeredVerb](callback);
+                this.express.route(endpoint)[registeredVerb](callback);
+                // this.express.route(endpoint).all(this.auth.config().authenticate())[registeredVerb](callback);
             } else {
                 this.express.route(endpoint)[registeredVerb](callback);
             }
